@@ -1,0 +1,37 @@
+{% extends "Laptop/layout.html" %}
+
+{% block title %}
+    <title>LapKart - Find Your Perfect Laptop</title>
+{% endblock title %}
+
+{% block main_content %}
+<div class="hero">
+    <div class="row align-items-center">
+        <div class="col-lg-7">
+            <h1>Power Your World with the Right Laptop</h1>
+            <p>Browse top brands, compare specs, and get the best deals on laptops for work, gaming, and everything in between.</p>
+            <a href="{% url 'shop' %}" class="btn btn-light mt-3">Shop Now <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="col-lg-5 text-center d-none d-lg-block">
+            <i class="bi bi-laptop" style="font-size: 10rem; opacity: 0.25;"></i>
+        </div>
+    </div>
+</div>
+
+{% if categories %}
+<div class="mb-4 d-flex flex-wrap gap-2">
+    {% for c in categories %}
+        <a href="{% url 'shop' %}?category={{ c.id }}" class="btn btn-outline-primary btn-sm rounded-pill">{{ c.name }}</a>
+    {% endfor %}
+</div>
+{% endif %}
+
+<h4 class="section-title">Featured Laptops</h4>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+    {% for laptop in featured %}
+        {% include "Laptop/_product_card.html" %}
+    {% empty %}
+        <p class="text-muted">No products available yet.</p>
+    {% endfor %}
+</div>
+{% endblock main_content %}

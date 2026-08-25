@@ -1,0 +1,25 @@
+{% extends "Laptop/layout.html" %}
+
+{% block title %}
+<title>{{ title }} - LapKart</title>
+{% endblock title %}
+
+{% block main_content %}
+<div class="shell-card mx-auto" style="max-width: 640px;">
+    <h3 class="mb-4">{{ title }}</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-3">
+                <label class="form-label">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}<div class="text-danger small">{{ field.errors }}</div>{% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary w-100">Save</button>
+    </form>
+</div>
+<div class="text-center mt-3">
+    <a href="{% url 'manage_products' %}" class="btn btn-link">Back to Manage Products</a>
+</div>
+{% endblock main_content %}

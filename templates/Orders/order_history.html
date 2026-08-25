@@ -1,0 +1,31 @@
+{% extends "Laptop/layout.html" %}
+
+{% block title %}
+    <title>My Orders - LapKart</title>
+{% endblock title %}
+
+{% block main_content %}
+<h3 class="section-title">My Orders</h3>
+
+<div class="shell-card">
+    {% if orders %}
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <tr><th>Order #</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th></th></tr>
+            {% for order in orders %}
+            <tr>
+                <td>#{{ order.id }}</td>
+                <td>{{ order.created_at|date:"M d, Y" }}</td>
+                <td>{{ order.items.count }}</td>
+                <td>₹{{ order.total_amount|floatformat:0 }}</td>
+                <td><span class="badge status-badge-{{ order.status }}">{{ order.get_status_display }}</span></td>
+                <td><a href="{% url 'order_detail' order.id %}" class="btn btn-sm btn-outline-primary">View</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% else %}
+    <p class="text-muted text-center py-4">You haven't placed any orders yet. <a href="{% url 'shop' %}">Start shopping</a>.</p>
+    {% endif %}
+</div>
+{% endblock main_content %}

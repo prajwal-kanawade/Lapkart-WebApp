@@ -1,0 +1,233 @@
+:root {
+    --brand: #4f46e5;
+    --brand-dark: #3730a3;
+    --brand-light: #eef2ff;
+    --ink: #1f2333;
+    --muted: #6b7280;
+    --surface: #f7f7fb;
+    --border: #e5e7eb;
+    --success: #16a34a;
+    --danger: #dc2626;
+}
+
+body {
+    background-color: var(--surface);
+    color: var(--ink);
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Navbar */
+.navbar-lapkart {
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-lapkart .navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--brand) !important;
+    letter-spacing: -0.5px;
+}
+
+.navbar-lapkart .nav-link {
+    color: var(--ink) !important;
+    font-weight: 500;
+}
+
+.navbar-lapkart .nav-link:hover {
+    color: var(--brand) !important;
+}
+
+.icon-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.25rem;
+    color: var(--ink) !important;
+}
+
+.icon-badge .badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    font-size: 0.65rem;
+    background-color: var(--brand);
+}
+
+/* Hero */
+.hero {
+    background: linear-gradient(120deg, var(--brand) 0%, var(--brand-dark) 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 4rem 3rem;
+    margin-bottom: 2.5rem;
+}
+
+.hero h1 {
+    font-weight: 800;
+    font-size: 2.75rem;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.hero .btn-light {
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 0.6rem 1.8rem;
+}
+
+/* Section titles */
+.section-title {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--brand);
+    padding-left: 12px;
+}
+
+/* Product cards */
+.product-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(31, 35, 51, 0.1);
+}
+
+.product-card .product-img-wrap {
+    height: 180px;
+    background-color: var(--brand-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-card .product-img-wrap img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.product-card .placeholder-icon {
+    font-size: 3rem;
+    color: var(--brand);
+    opacity: 0.4;
+}
+
+.product-card .card-body {
+    padding: 1rem;
+}
+
+.product-card .product-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.product-card .product-specs {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+}
+
+.product-card .price {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--brand-dark);
+}
+
+.wishlist-btn {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--danger);
+}
+
+.badge-stock {
+    font-size: 0.72rem;
+}
+
+.rating-stars {
+    color: #f5a623;
+    font-size: 0.9rem;
+}
+
+/* Filter bar */
+.filter-bar {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Cards / forms shell */
+.shell-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+}
+
+.status-badge-pending { background-color: #f59e0b; }
+.status-badge-confirmed { background-color: #3b82f6; }
+.status-badge-shipped { background-color: #8b5cf6; }
+.status-badge-delivered { background-color: #16a34a; }
+.status-badge-cancelled { background-color: #dc2626; }
+
+/* Footer */
+.footer-lapkart {
+    background-color: var(--ink);
+    color: #d1d5db;
+    padding: 2.5rem 0 1rem;
+    margin-top: 4rem;
+}
+
+.footer-lapkart h6 {
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.footer-lapkart a {
+    color: #d1d5db;
+}
+
+.footer-lapkart a:hover {
+    color: #fff;
+}
+
+.footer-lapkart .footer-bottom {
+    border-top: 1px solid #374151;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.auth-card {
+    max-width: 440px;
+    margin: 3rem auto;
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 2.5rem;
+}

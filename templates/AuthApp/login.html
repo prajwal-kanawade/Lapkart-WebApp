@@ -1,0 +1,28 @@
+{% extends "Laptop/layout.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Login - LapKart</title>
+{% endblock title %}
+
+{% block main_content %}
+<div class="auth-card" style="background-image: url('{% static "AuthApp/bag.jpg" %}'); background-size: cover; background-position: center;">
+    <div class="p-2" style="background: rgba(255,255,255,0.9); border-radius: 12px;">
+        <h3 class="text-center mb-4"><i class="bi bi-laptop"></i> Welcome Back</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="uname" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="pw" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+        <p class="text-center mt-3 mb-0">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+    </div>
+</div>
+{% endblock main_content %}

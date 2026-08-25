@@ -1,0 +1,43 @@
+{% extends "Laptop/layout.html" %}
+
+{% block title %}
+    <title>Order #{{ order.id }} - LapKart</title>
+{% endblock title %}
+
+{% block main_content %}
+<h3 class="section-title">Order #{{ order.id }}</h3>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="shell-card">
+            <table class="table align-middle">
+                <tr><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th></tr>
+                {% for item in order.items.all %}
+                <tr>
+                    <td>{{ item.product_label }}</td>
+                    <td>₹{{ item.price|floatformat:0 }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.subtotal|floatformat:0 }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="text-end">
+                <strong>Total: ₹{{ order.total_amount|floatformat:0 }}</strong>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="shell-card">
+            <h5>Status</h5>
+            <span class="badge status-badge-{{ order.status }} mb-3">{{ order.get_status_display }}</span>
+            <h5>Shipping Address</h5>
+            <p class="mb-1">{{ order.full_name }}</p>
+            <p class="mb-1">{{ order.address_line }}</p>
+            <p class="mb-1">{{ order.city }}, {{ order.state }} - {{ order.pincode }}</p>
+            <p class="mb-1">Phone: {{ order.phone }}</p>
+            <h5 class="mt-3">Payment</h5>
+            <p>{{ order.get_payment_method_display }}</p>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

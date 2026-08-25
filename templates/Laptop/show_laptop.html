@@ -1,0 +1,74 @@
+{% extends "Laptop/layout.html" %}
+
+{% block title %}
+    <title>Shop Laptops - LapKart</title>
+{% endblock title %}
+
+{% block main_content %}
+<h3 class="section-title">Shop Laptops</h3>
+
+<form method="get" class="filter-bar row g-3 align-items-end">
+    <div class="col-md-3">
+        <label class="form-label small text-muted">Search</label>
+        <input type="text" name="q" class="form-control" placeholder="Company, variant, processor..." value="{{ query }}">
+    </div>
+    <div class="col-md-2">
+        <label class="form-label small text-muted">Category</label>
+        <select name="category" class="form-select">
+            <option value="">All</option>
+            {% for c in categories %}
+                <option value="{{ c.id }}" {% if selected_category == c.id|stringformat:"s" %}selected{% endif %}>{{ c.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label small text-muted">Min Price</label>
+        <input type="number" name="min_price" class="form-control" value="{{ min_price }}">
+    </div>
+    <div class="col-md-2">
+        <label class="form-label small text-muted">Max Price</label>
+        <input type="number" name="max_price" class="form-control" value="{{ max_price }}">
+    </div>
+    <div class="col-md-2">
+        <label class="form-label small text-muted">Sort By</label>
+        <select name="sort" class="form-select">
+            <option value="newest" {% if sort == "newest" %}selected{% endif %}>Newest</option>
+            <option value="price_asc" {% if sort == "price_asc" %}selected{% endif %}>Price: Low to High</option>
+            <option value="price_desc" {% if sort == "price_desc" %}selected{% endif %}>Price: High to Low</option>
+        </select>
+    </div>
+    <div class="col-md-1">
+        <button type="submit" class="btn btn-primary w-100"><i class="bi bi-funnel"></i></button>
+    </div>
+</form>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+    {% for laptop in page_obj %}
+        {% include "Laptop/_product_card.html" %}
+    {% empty %}
+        <p class="text-muted">No laptops match your filters.</p>
+    {% endfor %}
+</div>
+
+{% if page_obj.paginator.num_pages > 1 %}
+<nav class="mt-4">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}&q={{ query }}&category={{ selected_category }}&sort={{ sort }}">Previous</a></li>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}&q={{ query }}&category={{ selected_category }}&sort={{ sort }}">{{ num }}</a>
+            </li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&q={{ query }}&category={{ selected_category }}&sort={{ sort }}">Next</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+
+{% if user.is_staff %}
+<a href="{% url 'add_laptop' %}" class="btn btn-outline-primary mt-3"><i class="bi bi-plus-circle"></i> Add Laptop</a>
+{% endif %}
+{% endblock main_content %}

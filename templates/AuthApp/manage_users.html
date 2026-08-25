@@ -1,0 +1,49 @@
+{% extends "Laptop/layout.html" %}
+
+{% block title %}
+    <title>Manage Users - LapKart</title>
+{% endblock title %}
+
+{% block main_content %}
+<h3 class="section-title">Manage Users</h3>
+
+<div class="shell-card">
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <tr><th>Username</th><th>Email</th><th>Joined</th><th>Role</th><th></th></tr>
+            {% for u in users %}
+            <tr>
+                <td>{{ u.username }}{% if u.pk == request.user.pk %} <span class="text-muted small">(you)</span>{% endif %}</td>
+                <td>{{ u.email|default:"-" }}</td>
+                <td>{{ u.date_joined|date:"M d, Y" }}</td>
+                <td>
+                    {% if u.is_superuser %}
+                        <span class="badge bg-dark">Superuser</span>
+                    {% elif u.is_staff %}
+                        <span class="badge bg-primary">Staff</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Customer</span>
+                    {% endif %}
+                </td>
+                <td class="text-end">
+                    {% if u.pk == request.user.pk %}
+                        <button class="btn btn-sm btn-outline-secondary" disabled>Can't change yourself</button>
+                    {% elif u.is_superuser and not request.user.is_superuser %}
+                        <button class="btn btn-sm btn-outline-secondary" disabled>Superuser only</button>
+                    {% else %}
+                        <form method="post" action="{% url 'toggle_staff' u.pk %}">
+                            {% csrf_token %}
+                            {% if u.is_staff %}
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Revoke Staff</button>
+                            {% else %}
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Grant Staff</button>
+                            {% endif %}
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock main_content %}
